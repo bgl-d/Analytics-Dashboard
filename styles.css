@@ -3,9 +3,9 @@ body {
 }
 
 .layout {
-  display: flex;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  min-height: 100vh;
+    display: flex;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
 }
 
 .logo{
@@ -24,25 +24,31 @@ body {
     width: auto;
 }
 
+
+/* Sidebar and links */
 .sidebar {
     flex: 1;
     display: flex;
-    gap: 10px;
+    gap: 1rem;
     flex-direction: column;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     background-color: #0F123F;
 }
 
 .sidebar a{
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 15px;
-    padding-left: 30px;
+    padding: 0.5rem;
+    gap: 1rem;
+    padding-left: 1.5rem;
     font-size: medium;
     text-decoration: none;
     color: #8c8fc6;
+}
+
+.mainLinks{
+    padding-top: 20px;
 }
 
 .bottomLinks {
@@ -60,14 +66,44 @@ body {
 }
 
 .icon {
-  width: 1.1em;
-  height: auto;
-  display: inline-block;
-  vertical-align: top;
+    width: 1rem;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
 }
 
+
+/* Main content, metric cards */
 .main-content {
     flex: 5;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.metrics-grid {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.metric-card{
+    flex: 1;
+    border: solid 1px #0000004c;
+    border-radius: 1rem;
+
+}
+
+.metric-card > *{
+    margin: 1rem;
+}
+
+.metric-card span{
+    display:block;
+    font-size: small;
+    color: #0000008b;
+    text-align: center;
+}
+
+.metric-card h3{
+    text-align: center;
 }
