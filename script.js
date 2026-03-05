@@ -48,7 +48,10 @@ btnEl.forEach(button => {
 
         const periodId = e.target.getAttribute('id');
         loadKPIs(periodId);
-        loadRevenueChart(periodId)
+        loadRevenueChart(periodId);
+        loadTrafficChart(periodId);
+        loadCategoryChart(periodId)
+
     });
 });
 
@@ -57,6 +60,7 @@ loadKPIs(initialPeriod);
 
 
 // Functions for plotting graphs
+// Revenue line graph
 let revenueChart;
 async function loadRevenueChart(period) {
     try {
@@ -85,6 +89,15 @@ async function loadRevenueChart(period) {
                 }]
             },
             options: {
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        bottom: 30,
+                        top: 0
+                    }
+                },
+                maintainAspectRatio: false,
                 responsive: true,
                 plugins: {
                     tooltip: {
@@ -119,3 +132,110 @@ async function loadRevenueChart(period) {
 }
 
 loadRevenueChart(initialPeriod);
+
+// Generated traffic pie chart
+let trafficChart;
+async function loadTrafficChart(period) {
+    try {
+        const response = await fetch('data/traffic.json');
+        
+        if (!response.ok) throw new Error('Ошибка загрузки файла');
+        
+        const data = await response.json();
+        
+        const ctx = document.getElementById('trafficChart').getContext('2d');
+        if (trafficChart) {
+            trafficChart.destroy();
+        }
+        trafficChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: data[period].Source,
+                datasets: [{
+                    label: 'Traffic',
+                    data: data[period].Traffic,
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',  // Soft Red
+                    'rgba(54, 162, 235, 0.8)',  // Soft Blue
+                    'rgba(255, 206, 86, 0.8)',  // Soft Yellow
+                    'rgba(75, 192, 192, 0.8)',  // Teal/Green
+                    'rgba(153, 102, 255, 0.8)'  // Soft Purple
+                    ],
+                    borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1, 
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        bottom: 30,
+                        top: 0
+                    }
+                },
+            }
+        });
+    } catch (error) {
+        console.error('Ошибка:', error);
+        document.getElementById('Revenue').textContent = 'Не удалось загрузить данные.';
+    }
+}
+
+loadTrafficChart(initialPeriod);
+
+// Generated traffic pie chart
+let categoryChart;
+async function loadCategoryChart(period) {
+    try {
+        const response = await fetch('data/category.json');
+        
+        if (!response.ok) throw new Error('Ошибка загрузки файла');
+        
+        const data = await response.json();
+        
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        if (categoryChart) {
+            categoryChart.destroy();
+        }
+        categoryChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data[period].Category,
+                datasets: [{
+                    label: 'Revenue',
+                    data: data[period].Revenue,
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1, 
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        bottom: 20,
+                        top: 0
+                    }
+                },
+            }
+        });
+    } catch (error) {
+        console.error('Ошибка:', error);
+        document.getElementById('Revenue').textContent = 'Не удалось загрузить данные.';
+    }
+}
+
+loadCategoryChart(initialPeriod);
+

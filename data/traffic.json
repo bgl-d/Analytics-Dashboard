@@ -1,0 +1,50 @@
+{
+    "all_time": {
+        "Traffic":[
+            259114,
+            171748,
+            57516,
+            57410,
+            28922
+        ],
+        "Source":[
+            "Email",
+            "Adwords",
+            "Facebook",
+            "YouTube",
+            "Organic"
+        ]
+    },
+    "current_month": {
+        "Traffic":[
+            6238,
+            4089,
+            1447,
+            1442,
+            722
+        ],
+        "Source":[
+            "Email",
+            "Adwords",
+            "YouTube",
+            "Facebook",
+            "Organic"
+        ]
+    },
+    "current_year": {
+        "Traffic":[
+            59264,
+            39315,
+            13200,
+            13134,
+            6797
+        ],
+        "Source":[
+            "Email",
+            "Adwords",
+            "Facebook",
+            "YouTube",
+            "Organic"
+        ]
+    }
+}
