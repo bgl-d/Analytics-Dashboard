@@ -3,6 +3,7 @@
 <head>
   <title>Dashboard</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -48,7 +49,7 @@
             </g>
             </g>
           </svg>
-          <span>A/B testing</span>
+          <span>Products</span>
         </a>
         <a href="", id="settings">
           <svg class='icon' width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -134,34 +135,38 @@
   
     <div class="main-content">
       <h1 id="page_name">Overview</h1>
+      <div class="period-picker">
+        <button class="btn-period active" id="current_month">This Month</button>
+        <button class="btn-period" id="current_year">This year</button>
+        <button class="btn-period" id="all_time">All time</button>
+      </div>
       <div class="metrics-grid">
         <div class="metric-card">
           <p class="metric-title">Total Sales</p>
-          <h3 class="metric-value">-</h3>
-          <span class="metric-change">2% this week</span>
+          <p id="Revenue" class="metric">-</p>
+          <span class="metric-change" data-metric="Revenue-change">-</span>
         </div>
         <div class="metric-card">
           <p class="metric-title">AOV</p>
-          <h3 class="metric-value">-</h3>
-          <span class="metric-change">-10% this week</span>
+          <p id="AOV",  class="metric">-</p>
+          <span class="metric-change" data-metric="AOV-change">-</span>
         </div>
         <div class="metric-card">
-          <p class="metric-title">Cart Abandonment Rate</p>
-          <h3 class="metric-value">-</h3>
-          <span class="metric-change">-1% this week</span>
+          <p class="metric-title">RPR</p>
+          <p id="RPR" class="metric">-</p>
+          <span class="metric-change" data-metric="RPR-change">-</span>
         </div>
         <div class="metric-card">
-          <p class="metric-title">CLV</p>
-          <h3 class="metric-value">-</h3>
-          <span class="metric-change">+5% this week</span>
+          <p class="metric-title">Email Conversion Rate</p>
+          <p id="CR" class="metric">-</p>
+          <span class="metric-change" data-metric="CR-change">-</span>
         </div>
-        <div class="metric-card">
-          <p class="metric-title">CLV</p>
-          <h3 class="metric-value">-</h3>
-          <span class="metric-change">+5% this week</span>
-        </div>
+      </div>
+      <div style="width: 80%; margin: auto;">
+        <canvas id="myChart"></canvas>
       </div>
     </div>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>

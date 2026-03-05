@@ -9,6 +9,7 @@ body {
 }
 
 .logo{
+    padding-top: 1em;
     align-items: center;
     display: flex;
     padding-left: 1rem;
@@ -53,7 +54,7 @@ body {
 
 .bottom-links{
     margin-top: auto;
-    padding-left: 1em;
+    padding-left: 0.5em;
     padding-bottom: 1em;
 }
 
@@ -70,17 +71,11 @@ body {
 
 
 /* Main content, metric cards */
-.main-content {
-    flex: 5;
-    padding: 1rem;
-    padding-top: 0;
-    width: 100%;
-}
 
 .main-content {
     flex: 5;
     padding: 1rem;
-    padding-top: 0;
+    padding-top: 1em;
     width: 100%;
 }
 
@@ -92,7 +87,7 @@ body {
 
 .metric-card{
     flex: 1;
-    border: solid 1px #0000004c;
+    border: solid 1px #ddd;
     border-radius: 1rem;
 
 }
@@ -110,4 +105,48 @@ body {
 
 .metric-card h3{
     text-align: center;
+}
+
+.metric{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.period-picker {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+}
+
+.btn-period {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-period:first-child { 
+    border-radius: 8px 0 0 8px; 
+}
+
+.btn-period:last-child { 
+    border-radius: 0 8px 8px 0; 
+}
+
+.btn-period.active {
+  background-color: #0F123F;
+  color: white;
+  border-color: #0F123F;
+  z-index: 1;
+}
+
+.metric-change.positive { 
+    color: #3d8f50; 
+}
+
+.metric-change.negative { 
+    color: #9a3f48; 
 }
