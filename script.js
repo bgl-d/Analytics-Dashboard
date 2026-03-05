@@ -48,42 +48,74 @@ btnEl.forEach(button => {
 
         const periodId = e.target.getAttribute('id');
         loadKPIs(periodId);
+        loadRevenueChart(periodId)
     });
 });
 
 const initialPeriod = "current_month";
 loadKPIs(initialPeriod);
 
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-      }
-    }
-  },
-};
 
-async function loadRevenueGraph() {
+// Functions for plotting graphs
+let revenueChart;
+async function loadRevenueChart(period) {
     try {
-        const response = await fetch('revenue_1m/Revenue.json');
+        const response = await fetch('data/revenue.json');
         
         if (!response.ok) throw new Error('Ошибка загрузки файла');
         
         const data = await response.json();
-
+        
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        if (revenueChart) {
+            revenueChart.destroy();
+        }
+        revenueChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data[period][period === 'current_month' ? 'Day' : 'Month'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: data[period].Revenue,
+                    borderColor: '#36a3ebdf',
+                    backgroundColor: '#36a3eb19',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Revenue: $' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {                
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
     } catch (error) {
         console.error('Ошибка:', error);
         document.getElementById('Revenue').textContent = 'Не удалось загрузить данные.';
     }
 }
 
-const ctx = document.getElementById('revenueChart').getContext('2d');
-
+loadRevenueChart(initialPeriod);
