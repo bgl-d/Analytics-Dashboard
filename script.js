@@ -71,13 +71,9 @@ const config = {
   },
 };
 
-
-const labels = jsonData.map(item => item.month);
-const values = jsonData.map(item => item.sales);
-
-async function loadRevenueGraph(period) {
+async function loadRevenueGraph() {
     try {
-        const response = await fetch('data/Revenue.json');
+        const response = await fetch('revenue_1m/Revenue.json');
         
         if (!response.ok) throw new Error('Ошибка загрузки файла');
         
@@ -88,3 +84,6 @@ async function loadRevenueGraph(period) {
         document.getElementById('Revenue').textContent = 'Не удалось загрузить данные.';
     }
 }
+
+const ctx = document.getElementById('revenueChart').getContext('2d');
+
